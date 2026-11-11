@@ -60,14 +60,16 @@ footer{text-align:center;padding:25px;color:#68778a}
 </div>
 </section>
 
-<section id="resultados">
-<div class="card">
-<h2>🏆 Resultados</h2>
-<p>Resultados de Primera y Segunda División.</p>
-<p>Los marcadores en directo se incorporarán mediante una fuente de datos deportivos.</p>
-</div>
-</section>
 
+<section id="resultados">
+  <div class="card">
+    <h2>🏆 Resultados</h2>
+    <p>Primera y Segunda División y Copa del Rey.</p>
+    <div id="lista-partidos">
+      Cargando partidos...
+    </div>
+  </div>
+</section>
 <section id="clasificacion">
 <div class="card">
 <h2>📊 Clasificaciones</h2>
@@ -99,7 +101,7 @@ if ("serviceWorker" in navigator) {
 
 <script>
 async function cargarPartidos() {
-  const contenedor = document.getElementById("resultados");
+  const contenedor = document.getElementById("lista-partidos");
   if (!contenedor) return;
 
   contenedor.innerHTML = "Cargando partidos...";
