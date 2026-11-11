@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#071b35">
+<title>KINIFUTBOL</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f1f4f8;font-family:Arial,sans-serif;color:#14243a}
+header{background:#071b35;color:white;text-align:center;padding:25px 12px}
+header h1{margin:0;color:#28d17c;font-size:32px}
+header p{margin:8px 0 0}
+nav{display:flex;background:#102b4b;justify-content:center;flex-wrap:wrap}
+nav button{background:none;border:0;color:white;padding:14px 12px;font-weight:bold}
+main{max-width:700px;margin:auto;padding:15px}
+section{display:none}
+section.active{display:block}
+.card{background:white;border-radius:12px;padding:18px;margin:14px 0;box-shadow:0 2px 8px #0001}
+h2{color:#087b50}
+.green{color:#078b50;font-weight:bold}
+footer{text-align:center;padding:25px;color:#68778a}
+</style>
+</head>
+<body>
+<header>
+<h1>⚽ KINIFUTBOL</h1>
+<p>Tu pasión por el fútbol, en directo</p>
+</header>
+
+<nav>
+<button onclick="show('inicio')">INICIO</button>
+<button onclick="show('guia')">GUÍA TV</button>
+<button onclick="show('resultados')">RESULTADOS</button>
+<button onclick="show('clasificacion')">CLASIFICACIÓN</button>
+</nav>
+
+<main>
+<section id="inicio" class="active">
+<div class="card">
+<h2>¡Bienvenido a KINIFUTBOL!</h2>
+<p>Todo el fútbol español en un solo lugar.</p>
+<p class="green">Primera División · Segunda División · Copa del Rey</p>
+</div>
+<div class="card">
+<h2>⚽ Fútbol en directo</h2>
+<p>Próximamente: goles y resultados actualizados en tiempo real.</p>
+</div>
+</section>
+
+<section id="guia">
+<div class="card">
+<h2>📺 Guía de fútbol en TV</h2>
+<p>Partidos del día y dónde verlos en España.</p>
+<p>La programación se conectará próximamente.</p>
+</div>
+</section>
+
+<section id="resultados">
+<div class="card">
+<h2>🏆 Resultados</h2>
+<p>Resultados de Primera y Segunda División.</p>
+<p>Los marcadores en directo se incorporarán mediante una fuente de datos deportivos.</p>
+</div>
+</section>
+
+<section id="clasificacion">
+<div class="card">
+<h2>📊 Clasificaciones</h2>
+<p>Clasificación de Primera y Segunda División.</p>
+<p>Datos pendientes de conectar.</p>
+</div>
+</section>
+</main>
+
+<footer>
+KINIFUTBOL · El fútbol se vive aquí
+</footer>
+
+<script>
+function show(id){
+document.querySelectorAll('main section').forEach(s=>s.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+}
+</script>
+</body>
+</html>
