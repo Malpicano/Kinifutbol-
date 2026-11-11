@@ -1,0 +1,12 @@
+
+{
+  "name": "KINIFUTBOL",
+  "short_name": "KINIFUTBOL",
+  "description": "Guía y resultados del fútbol español",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f1f4f8",
+  "theme_color": "#071b35"
+}
