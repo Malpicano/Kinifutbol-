@@ -62,12 +62,115 @@ footer{text-align:center;padding:25px;color:#68778a}
 
 
 <section id="resultados">
-  <div class="card">
-    <h2>🏆 Resultados</h2>
-    <p>Primera y Segunda División y Copa del Rey.</p>
-    <div id="lista-partidos">
-      Cargando partidos...
-    </div>
+  
+<div id="kini-resultados">
+  <h2>⚽ KINIFUTBOL - Resultados en directo</h2>
+  <div id="kini-partidos">Cargando resultados...</div>
+</div>
+
+<style>
+#kini-resultados {
+  background:#101827;
+  color:white;
+  padding:15px;
+  border-radius:12px;
+  font-family:Arial,sans-serif;
+}
+#kini-resultados h2 {
+  text-align:center;
+  color:#35d879;
+}
+.kini-partido {
+  background:#202e42;
+  padding:14px;
+  margin:10px 0;
+  border-radius:9px;
+}
+.kini-liga {
+  color:#35d879;
+  font-weight:bold;
+  font-size:13px;
+}
+.kini-marcador {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+  margin-top:12px;
+  font-weight:bold;
+}
+.kini-goles {
+  font-size:23px;
+  white-space:nowrap;
+}
+.kini-estado {
+  color:#35d879;
+  text-align:center;
+  font-size:12px;
+  margin-top:8px;
+}
+</style>
+
+<script>
+const KINI_API_KEY = "PON_AQUI_TU_CLAVE";
+
+async function cargarResultados() {
+  const contenedor =
+    document.getElementById("kini-partidos");
+
+  try {
+    const respuesta = await fetch(
+      "https://footballdata.io/api/v1/fixtures?status=live&lang=es",
+      {
+        headers: {
+          "Authorization": "Bearer " + KINI_API_KEY
+        }
+      }
+    );
+
+    if (!respuesta.ok) {
+      throw new Error("Error al consultar la API");
+    }
+
+    const json = await respuesta.json();
+    const partidos = json.data.matches || [];
+
+    if (!partidos.length) {
+      contenedor.innerHTML =
+        "No hay partidos en directo actualmente.";
+      return;
+    }
+
+    contenedor.innerHTML = partidos.map(p => `
+      <div class="kini-partido">
+        <div class="kini-liga">
+          ${p.league_name || "Fútbol"}
+        </div>
+        <div class="kini-marcador">
+          <span>${p.home_team?.team_name || "Local"}</span>
+          <span class="kini-goles">
+            ${p.score?.home ?? 0} -
+            ${p.score?.away ?? 0}
+          </span>
+          <span>${p.away_team?.team_name || "Visitante"}</span>
+        </div>
+        <div class="kini-estado">
+          ${p.status_localized || p.status || "En directo"}
+          ${p.minute ? " · " + p.minute : ""}
+        </div>
+      </div>
+    `).join("");
+
+  } catch (error) {
+    contenedor.innerHTML =
+      "No se pudieron cargar los resultados.";
+    console.error(error);
+  }
+}
+
+cargarResultados();
+setInterval(cargarResultados, 30000);
+</script>
   </div>
 </section>
 <section id="clasificacion">
